@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ product.name }}
+    - Détail du produit
+{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+
+        <!-- Bouton de retour -->
+        <a href="{{ path('app_home') }}" class="btn btn-outline-secondary mb-4">
+            ← Retour aux produits
+        </a>
+
+        <div class="card shadow-lg border-0 rounded-4 overflow-hidden mb-5">
+            <div class="row g-0">
+                <!-- Image à gauche -->
+                <div class="col-md-6">
+                    <img src="{{ asset('uploads/images/' ~ product.image) }}" class="img-fluid h-100" alt="Image de {{ product.name }}" style="object-fit: cover; height: 100%; width: 100%;"></div>
+
+                    <!-- Détails à droite -->
+                    <div class="col-md-6 p-4 d-flex flex-column justify-content-center">
+                        <h2 class="fw-bold mb-3">
+                            {{ product.name }}
+                        </h2>
+                        <p class="text-muted mb-4">
+                            {{ product.description }}
+                        </p>
+                        <p class="mb-4">
+                            <strong>
+                                Dernière mise à jour :
+                            </strong>
+                            il y a 3 minutes
+                        </p>
+                        <h3>{{product.price}}CFA</h3>
+                        <a href="#" class="btn btn-success btn-lg w-50">
+                            Ajouter au panier
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="mb-4">
+                Derniers produits ajoutés
+            </h2>
+
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="{{ asset('uploads/images/' ~ product.image) }}" alt="Image du produit">
+                                <div class="card-body">
+                                    <a href="{{ path('app_home_product_show', {'id': product.id}) }}" style="text-decoration: none;">
+                                        <h5 class="card-title">
+                                            {{ product.name }}
+                                        </h5>
+                                    </a>
+                                    <p class="card-text">
+                                        {{ product.description|slice(0, 60) }}
+                                        ...
+                                    </p>
+                                    <h3>{{product.price}}CFA</h3>
+                                    <a href="#" class="btn btn-outline-success">
+                                        Ajouter au panier
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        {% endblock %}
+        

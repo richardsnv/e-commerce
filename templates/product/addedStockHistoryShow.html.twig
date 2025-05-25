@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Historique du produit
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>
+            Historique du produit
+        </h1>
+
+        <table class="table table-striped table-hover table-borderless align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <th>
+                        Quantité
+                    </th>
+                    <th>
+                        Date d'ajout
+                    </th>
+
+                </tr>
+                {% for productAdded in productsAdded %}
+
+                    <tr>
+                        <td>
+                            {{ productAdded.id }}
+                        </td>
+                        <td>
+                            {{ productAdded.qte }}
+                        </td>
+                        <td>
+                            {{ productAdded.createdAt ? productAdded.createdAt|date('Y-m-d H:i:s') : '' }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </div>
+
+        {% endblock %}
+        

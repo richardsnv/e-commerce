@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Product index
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>
+            Listes des Produits
+        </h1>
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover table-borderless align-middle">
+                <thead class="table-light">
+                    <caption>
+                        Nos Produits
+                    </caption>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Stock
+                        </th>
+                        {# <th>
+                            Date de creation
+                        </th> #}
+                        <th>
+                            actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>
+                                {{ product.id }}
+                            </td>
+                            <td>
+                                {{ product.name }}
+                            </td>
+                            <td>
+                                {{ product.description |slice(0,100) }}
+                                ...
+                            </td>
+                            <td>
+                                {{ product.price }}
+                            </td>
+                            <td>
+                                {% if product.stock >0 %}
+                                    {{ product.stock }}
+
+                                {% else %}
+                                    <span class="text-danger">
+                                        Stock epuisé
+                                    </span>
+                                {% endif %}
+
+                            </td>
+                            {# <td>
+                                {{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}
+                            </td> #}
+                            <td>
+                                <a class="btn btn-outline-primary" href="{{ path('app_product_show', {'id': product.id}) }}">
+                                    show
+                                </a>
+                                <a class="btn btn-outline-success " href="{{ path('app_product_edit', {'id': product.id}) }}">
+                                    edit
+                                </a>
+                                {# Buton pour ajouter le stock #}
+                                <a class="btn btn-outline-info " href="{{path('app_product_stock_add',{'id':product.id})}}">
+                                    Ajouter le stock
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">
+                                no records found
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-success" href="{{ path('app_product_new') }}">
+            Ajouter
+        </a>
+    </div>
+{% endblock %}

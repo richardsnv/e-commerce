@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SubCategory index{% endblock %}
+
+{% block body %}
+<div class="container">
+<i class="fas fa-container-storage fa-xs fa-fw">ok</i>
+    <h1>Sous categories</h1>
+
+        <table class="table table-striped table-inverse table-responsive">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Categorie</th>
+                {# <th>CreatedAt</th> #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sub_category in sub_categories %}
+            <tr>
+                <td>{{ sub_category.id }}</td>
+                <td>{{ sub_category.name }}</td>
+                <td>{{ sub_category.category.name }}</td>
+                {# <td>{{ sub_category.createdAt ? sub_category.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
+                <td>
+                    <a class="btn btn-info btn-sm" href="{{ path('app_sub_category_show', {'id': sub_category.id}) }}">show</a>
+                    <a  class="btn btn-secondary btn-sm btn-ms" href="{{ path('app_sub_category_edit', {'id': sub_category.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-primary" href="{{ path('app_sub_category_new') }}">Create new</a>
+</div>
+{% endblock %}

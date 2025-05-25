@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+<div class="row">
+    <i class="fa fa-columns" aria-hidden="true">
+        iievore
+    </i>
+    <div class="col-4-md">
+        {{ form_widget(form) }}
+    </div>
+</div>
+
+<button class="btn btn-outline-primary btn-block">
+    {{ button_label|default('Save') }}
+</button>
+{{ form_end(form) }}
